@@ -175,7 +175,7 @@ def extract_stock_info(stock_data: str) -> Dict[str, Any]:
                 return {
                     'symbol': data.get('stock', 'AAPL'),
                     'period': '自定义周期',
-                    'data_summary': f"包含{len(data.get('prices', []))}个价格数据点"
+                    'data_summary': f"包含{data.get('prices', 5)}个价格数据点"
                 }
     except:
         pass
@@ -254,7 +254,7 @@ def create_output_agent(llm_model: OpenAIChatCompletionClient, memory: ListMemor
         - 返回生成的文件路径
 
         重要：确保在调用工具时提供以JSON格式组织的，清晰的结构化信息，基于以下标准：
-        1.股票信息中至少包含股票代码（标记为stock）、数据时间区间（标记为period）、包含的股价数据点（标记为prices），以及其他必要信息。
+        1.股票信息中至少包含股票代码（标记为stock）、数据时间区间（标记为period）、制图使用到的股价数据点个数（标记为prices），以及其他必要信息。
         2.图表信息中至少包含图表的路径（标记为chart_path）。
         3.分析信息中包含之前智能体输出的股票分析结果。
         """,
